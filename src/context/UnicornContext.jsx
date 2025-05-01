@@ -1,5 +1,6 @@
 import { createContext, useState, useContext } from 'react';
 import axios from 'axios';
+import { exportToPdf } from '../utils/ExportToPdf';
 
 const API_ENDPOINT = 'https://crudcrud.com/api/1fdbc3b4c0c4404686062afd59ab0e9a/unicorns';
 

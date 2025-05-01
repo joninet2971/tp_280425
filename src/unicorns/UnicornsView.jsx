@@ -1,9 +1,10 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useUnicorns } from '../context/UnicornContext';
+import { exportToPdf } from '../utils/ExportToPdf';
 
 const UnicornsView = () => {
-  const { unicorns, loading, error, getUnicorns, deleteUnicorn } = useUnicorns();
+  const { unicorns, getUnicorns, deleteUnicorn } = useUnicorns();
 
   useEffect(() => {
     getUnicorns();
@@ -17,16 +18,25 @@ const UnicornsView = () => {
     }
   };
 
+  const handleExportPdf = () => {
+    const columns = ['Nombre', 'Edad', 'Color'];
+    const data = unicorns.map(unicorn => [
+      unicorn.name,
+      unicorn.age,
+      unicorn.color
+    ]);
+    exportToPdf(data, 'Unicornios', columns);
+  };
+
   return (
     <div className="unicorns-view">
       <h1>Lista de Unicornios</h1>
-      <Link to="/unicornios/crear" className="btn btn-primary mb-3">
+      <Link to="/unicornios/crear" className="btn btn-primary mb-3 me-2">
         Crear Nuevo Unicornio
       </Link>
-      
-      {unicorns.length === 0 ? (
-        <p>No hay unicornios disponibles. ¡Crea uno nuevo!</p>
-      ) : (
+      <button onClick={handleExportPdf} className="btn btn-success mb-3">
+        Exportar a PDF
+      </button>
         <table className="table">
           <thead>
             <tr>
@@ -60,7 +70,6 @@ const UnicornsView = () => {
             ))}
           </tbody>
         </table>
-      )}
     </div>
   );
 };
