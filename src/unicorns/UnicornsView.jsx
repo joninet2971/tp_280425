@@ -10,17 +10,12 @@ const UnicornsView = () => {
   }, []);
 
   const handleDelete = async (id) => {
-    if (window.confirm('¿Estás seguro de que deseas eliminar este unicornio?')) {
-      try {
-        await deleteUnicorn(id);
-      } catch (error) {
-        console.error('Error al eliminar:', error);
-      }
+    try {
+      await deleteUnicorn(id);
+    } catch (error) {
+      console.error('Error al eliminar:', error);
     }
   };
-
-  if (loading) return <div>Cargando unicornios...</div>;
-  if (error) return <div className="error">{error}</div>;
 
   return (
     <div className="unicorns-view">
