@@ -33,10 +33,8 @@ function App() {
         </nav>
 
         <Routes>
-          {/* Ruta principal redirige a unicornios */}
           <Route path="/" element={<Navigate to="/unicornios" replace />} />
           
-          {/* Rutas de Unicornios envueltas en UnicornProvider */}
           <Route 
             path="/unicornios/*" 
             element={
@@ -46,7 +44,6 @@ function App() {
             } 
           />
           
-          {/* Rutas de Productos (sin contexto) */}
           <Route path="/productos/*" element={<ProductsRoutes />} />
         </Routes>
       </div>
